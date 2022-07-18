@@ -1,0 +1,25 @@
+{% extends 'basic.html' %}
+{% block body %}
+<div class="bg-image d-flex flex-column justify-content-center align-items-center" style="
+background-image: url('static/img_site/background-home.jpeg');
+background-size: cover;
+background-position: center;
+height: calc(100vh - 64px);
+">
+<div class="home bg-image d-flex flex-column justify-content-center align-items-center">
+    <div>
+        <h1 class="text-white">أهلا بكم في <span class="red">فِلَسطين</span></h1>
+    </div>
+    <div>
+        <h5 class="text-white">نتحدث عن دولتنا و عن أحداث شعبنا الحبيب</h5>
+    </div>
+
+</div>
+
+</div>
+<script>
+    window.onload = function () {
+        homebox.classList.add('active');
+    }    
+</script>
+{% endblock %} 

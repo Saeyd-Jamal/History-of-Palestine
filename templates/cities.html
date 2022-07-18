@@ -1,0 +1,138 @@
+{% extends 'basic.html' %}
+{% block body %}
+<style>
+  body{
+    background-image: url(static/img_site/background-home.jpeg);
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh);
+  }
+</style>
+<div>
+  <img class="px-5 py-1 palestine_map" src="{{ url_for('static', filename='img_site/p-map.jpg') }}" alt="Palestine map">
+  <div>
+    <button id="acre" title="عكا" class="city" onclick="acreFun()"></button>
+    <button id="haifa" title="حيفا" class="city" onclick="haifa()"></button>
+    <button id="jaffa" title="يافا" class="city" onclick="jaffa()"></button>
+    <button id="gaza" title="غزة" class="city" onclick="gaza()"></button>
+    <button id="tulkarm" title="طولكرم" class="city" onclick="tulkarm()"></button>
+    <button id="embryo" title="جنين" class="city" onclick="embryo()"></button>
+    <button id="nablus" title="نابلس" class="city" onclick="nablus()"></button>
+    <button id="jericho" title="أريحا" class="city" onclick="jericho()"></button>
+    <button id="ramallah" title="رام الله" class="city" onclick="ramallah()"></button>
+    <button id="jerusalem" title="القدس" class="city" onclick="jerusalem()"></button>
+    <button id="bethlehem" title="بيت لحم" class="city" onclick="bethlehem()"></button>
+    <button id="hebron" title="الخليل" class="city" onclick="hebron()"></button>
+    <button id="beersheba" title="بئر السبع" class="city" onclick="beersheba()"></button>
+  </div>
+</div>
+<section class="px-5"> 
+  <div>
+    <section class="text-light py-3 " id="info" >
+      <h1 class="">خريطةُ  <span class="red">فِلَسطين</span></h1>
+      <p id="info_p">إضغط على المدينة التي تريدها وسيظهر المعلومات عليها</p>
+    </section>
+    <div class="mx-5 card height card-border col-md-7" style="display: none;" id="map-info">
+      <h5 class="card-header"> المدينة  </h5>
+      <div class="card-body">
+        {% for name,text,id in data_cities['name']|zip(data_cities['text'],data_cities['id']):%}
+          <div id="{{id}}_box" style="display:none;" >
+            <h5 class="card-title text-right fw-bold">{{name}}</h5>
+            <p class="card-text text-right">{{text}}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let map_info =  document.getElementById('map-info');
+
+function none_cities(){
+  document.getElementById('acre_box').style.display = 'none';
+  document.getElementById('haifa_box').style.display = 'none';
+  document.getElementById('jaffa_box').style.display = 'none';
+  document.getElementById('gaza_box').style.display = 'none';
+  document.getElementById('gaza_box').style.display = 'none';
+  document.getElementById('tulkarm_box').style.display = 'none';
+  document.getElementById('embryo_box').style.display = 'none';
+  document.getElementById('nablus_box').style.display = 'none';
+  document.getElementById('jericho_box').style.display = 'none';
+  document.getElementById('ramallah_box').style.display = 'none';
+  document.getElementById('jerusalem_box').style.display = 'none';
+  document.getElementById('bethlehem_box').style.display = 'none';
+  document.getElementById('hebron_box').style.display = 'none';
+  document.getElementById('beersheba_box').style.display = 'none';
+  document.getElementById('info_p').style.display = 'none';
+}
+
+// هنا المدن مع اعدادات كل واحدة
+function acreFun(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('acre_box').style.display = 'block';
+}
+function haifa(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('haifa_box').style.display = 'block';
+}
+function jaffa(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('jaffa_box').style.display = 'block';
+}
+function gaza(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('gaza_box').style.display = 'block';
+}
+function tulkarm(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('tulkarm_box').style.display = 'block';
+}
+function embryo(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('embryo_box').style.display = 'block';
+}
+function nablus(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('nablus_box').style.display = 'block';
+}
+function jericho(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('jericho_box').style.display = 'block';
+}
+function ramallah(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('ramallah_box').style.display = 'block';
+}
+function jerusalem(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('jerusalem_box').style.display = 'block';
+}
+function bethlehem(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('bethlehem_box').style.display = 'block';
+}
+function hebron(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('hebron_box').style.display = 'block';
+}
+function beersheba(){
+  none_cities()
+  map_info.style.display = 'block';
+  document.getElementById('beersheba_box').style.display = 'block';
+}
+</script>
+
+{% endblock %}

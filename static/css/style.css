@@ -1,0 +1,246 @@
+body{
+  font-family: 'Tajawal', sans-serif;
+}
+/* تعديلات على بوتسرتاب */
+.me-auto {
+  margin-right: 0!important;
+}
+/* animation navbar */
+.navbar .nav-item {
+  margin-left: 20px;
+}
+
+.navbar .nav-item .nav-link {
+  color: #ffffff;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 5px 0;
+  position: relative;
+}
+.navbar .nav-item .nav-link::before {
+  content: "";
+  position: absolute;
+  left: 0; 
+  bottom: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 15px;
+  background-color: #d32929;
+  transition: all 0.7s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  transform: scale(0);
+}
+.navbar .nav-item .nav-link.active::before,
+.navbar .nav-item .nav-link:hover::before {
+  transform: scale(1);
+}
+/* Home */
+
+.home{
+  transform: scale(0);
+  transition: transform 0.5s;
+}
+.home.active {
+  transform: scale(1);
+}
+
+#slide1 .image1{
+  width: 50%;
+}
+
+#slide1 {
+  bottom: 32px;
+  animation-name:slidingstep1;
+  animation-duration:2s;
+  animation-iteration-count:1;
+  animation-direction:normal;
+  animation-timing-function:ease-out;
+  animation-fill-mode:forwards;
+  /* -webkit-animation:glide 2s ease-in-out alternate infinite; */
+}
+
+@keyframes slidingstep1  {
+  0% {
+    left:-100px;
+    opacity:0;
+  }
+  
+  5% {
+    left:-75px;
+    opacity:0.2;
+  }
+  
+  100% {
+    left:0px;
+    opacity:1;
+  }
+}
+
+
+/* animation btn navbar */
+.btn_nav{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.btn_nav .line{
+  display: block;
+  width: 40px;
+  height: 3px;
+  background-color: #ecf0f1;
+  margin-block: 10px;
+  border-radius: 4px;
+  transition: transform .5s,
+  opacity .25s;
+}
+.btn_nav.active .line:nth-child(1){
+  transform: translateY(13px)
+  rotate(45deg);
+}
+.btn_nav.active .line:nth-child(2){
+  opacity: 0;
+}
+.btn_nav.active .line:nth-child(3){
+  transform: translateY(-13px)
+  rotate(-45deg);
+}
+
+
+/* events */
+.cd-timeline__block:nth-child(odd){
+  flex-direction: row-reverse;
+}
+.cd-timeline__block:nth-child(even){
+  flex-direction: row;
+}
+.cd-timeline__block:nth-child(odd) .cd-timeline__img{
+  transform: rotate(180deg);
+}
+.cd-timeline__date:nth-child(odd){
+  width: 13%;
+  direction: rtl;
+}
+@media (max-width: 992px) {
+  .cd-timeline__block:nth-child(even){
+    flex-direction: row-reverse;
+  }
+}
+
+/* news */
+.text-right {
+  text-align: right;
+}
+.red {
+  color: red;
+}
+.white {
+  color: white;
+}
+.b-img {
+  border-radius: 10px;
+}
+.decoration-none {
+  text-decoration: none;
+}
+
+/* cities */
+.text-right {
+  text-align: right;
+}
+.b-img {
+  border-radius: 10px;
+}
+.decoration-none {
+  text-decoration: none;
+}
+
+#map-info {
+  position: absolute;
+  right: 0px;
+  top: 130px;
+}
+.palestine_map {
+  width: 418px;
+  position: absolute;
+  left: 0px;
+}
+.city {
+  background-color: black;
+  border: black;
+  border-radius: 50px 50px;
+  width: 5px;
+  height: 12px;
+  transition: all 0.7s cubic-bezier(0.6, -0.28, 0.74, 0.05)
+}
+.city:hover{
+  background-color: #ff2525;
+  transform: scale(1.2);
+} 
+#acre {
+  position: absolute;
+  top: 135px; 
+  left: 219px;
+}
+#haifa {
+  position: absolute;
+  top: 155px; 
+  left: 204px;
+}
+#jaffa {
+  position: absolute;
+  top: 255px; 
+  left: 182px;
+}
+#gaza {
+  position: absolute;
+  top: 340px; 
+  left: 139px;
+}
+
+#tulkarm {
+  position: absolute;
+  top: 210px; 
+  left: 205px;
+}
+#embryo {
+  position: absolute;
+  top: 208px; 
+  left: 240px;
+}
+#nablus{
+  position: absolute;
+  top: 230px; 
+  left: 228px;
+}
+#jericho {
+  position: absolute;
+  top: 295px; 
+  left: 250px;
+}
+#ramallah {
+  position: absolute;
+  top: 275px; 
+  left: 230px;
+}
+#jerusalem {
+  position: absolute;
+  top: 310px; 
+  left: 225px;
+  background-color: #ddeb1a;
+}
+#bethlehem {
+  position: absolute;
+  top: 325px; 
+  left: 215px;
+}
+#hebron {
+  position: absolute;
+  top: 350px; 
+  left: 215px;
+}
+#beersheba {
+  position: absolute;
+  top: 400px; 
+  left: 180px;
+}

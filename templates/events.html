@@ -1,0 +1,142 @@
+{% extends 'basic.html' %}
+{% block body %}
+<script>document.getElementsByTagName("html")[0].className += " js";</script>
+<div class="text-dark bg-light text-center py-3" id="info">
+  <h1>أحداث حصلت لدولتنا ولشعبنا الحبيب</h1>
+  <p>في هذه الصفحة نتحدث عن مجازر وحروب ارتكبها الاحتلال الغاصب بحق شعبنا الفلسطيني وانتفاضات حدثت على مر احتلال
+    دولتنا مع شرح كل حدث</p>
+</div>
+
+<section class="cd-timeline js-cd-timeline bg-light">
+
+<div class="container max-width-lg cd-timeline__container tab-content " id="pills-tabContent">
+  <div  id="pills-1" class="tab-pane fade  show active" role="tabpanel" aria-labelledby="pills-1-tab">
+    {%for year_event,num in list_year|zip(range(0,num_year_events,1)): %}
+      {% if 0 <= num < 10 :%}
+      <div class="cd-timeline__block">
+        <div class="cd-timeline__img cd-timeline__img--picture">
+          <img class="img_even_icon" src="{{ url_for('static', filename='img_site/triangle_icon.png') }}" alt="Picture">
+        </div>
+        <div class="cd-timeline__content text-component">
+          <h2>{{year_event}}</h2>
+          {% for year,date,heading,text,Link,Writer,link_nam in data_events['year']|zip(data_events['date'],data_events['heading'],data_events['text'],data_events['Link'],data_events['Writer'],links_nam): %}
+            {% if year == year_event : %}
+            <div class="row text-dark">
+              <p class="color-contrast-medium  col-md-9" style="overflow: hidden; height: 25px;">{{heading}} | {{text}}</p>
+              <p class="col-md-3"><a  class="nav-link d-inline" type="button" href="#" data-bs-toggle="modal" data-bs-target="#id-{{link_nam}}">...إقرأ المزيد</a></p>
+            </div>
+          <div class="flex justify-between items-center">
+            <span class="cd-timeline__date"></span>
+          </div>
+            {% endif %}  
+          {% endfor %}
+        </div>
+      </div>
+      {%endif%}
+    {%endfor%}
+  </div>
+  {%for num_post in range(2,num_events_10,1): %}
+    <div id="pills-{{num_post}}" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-{{num_post}}-tab">
+      {%for year_event,num in list_year|zip(range(0,num_year_events,1)): %}
+      {% if (num_post - 1) * 10 <= num < num_post * 10 : %}
+          <div class="cd-timeline__block">
+            <div class="cd-timeline__img cd-timeline__img--picture">
+              <img class="img_even_icon" src="{{ url_for('static', filename='img_site/triangle_icon.png') }}" alt="Picture">
+            </div>
+            <div class="cd-timeline__content text-component">
+              <h2>{{year_event}}</h2>
+              {% for year,date,heading,text,Link,Writer,link_nam in data_events['year']|zip(data_events['date'],data_events['heading'],data_events['text'],data_events['Link'],data_events['Writer'],links_nam): %}
+                {% if year == year_event : %}
+                <div class="row">
+                  <p class="color-contrast-medium col-md-9" style="overflow: hidden; height: 25px;">{{heading}} | {{text}}</p>
+                  <p class="col-md-3"><a  class="nav-link d-inline" type="button" href="#" data-bs-toggle="modal" data-bs-target="#id-{{link_nam}}">...إقرأ المزيد</a></p>
+                </div>
+              <div class="flex justify-between items-center">
+                <span class="cd-timeline__date"></span>
+              </div>
+                {% endif %}  
+              {% endfor %}
+            </div>
+          </div>
+      {%endif%}
+    {%endfor%}
+    </div>
+  {%endfor%}
+</div>
+<ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link rounded active" id="pills-1-tab" data-bs-toggle="pill" data-bs-target="#pills-1" type="button" role="tab" aria-controls="#pills-1" aria-selected="true">
+      <a href="#info" class="text-dark nav-link">1</a>
+    </button>
+  </li>
+{%for num_post in range(2,num_events_10,1): %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link  rounded " id="pills-{{num_post}}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{num_post}}" type="button" role="tab" aria-controls="#pills-{{num_post}}" aria-selected="false">
+      <a href="#info" class="text-dark nav-link">{{num_post}}</a>
+    </button>
+  </li>
+{%endfor%}
+</ul>
+<!-- modale evnent -->
+{%for year_event,num in list_year|zip(range(0,num_year_events,1)): %}
+  {% if 0 <= num < 10 :%}
+    {% for year,date,heading,text,Link,Writer,link_nam in data_events['year']|zip(data_events['date'],data_events['heading'],data_events['text'],data_events['Link'],data_events['Writer'],links_nam): %}
+      {% if year == year_event : %}
+    <div class="modal fade " id="id-{{link_nam}}" tabindex="-1" aria-labelledby="id-{{link_nam}}-Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-dark">
+          <div class="modal-header">
+            <h5 class="modal-title" id="id-{{link_nam}}-Label">{{heading}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{text}}</p>  
+            <a class="nav-link text-left" href="{{Link}}" target="_blank">_إقرأ المقال</a>
+          </div>
+          <div class="modal-footer" style=" justify-content: space-between;">
+            <p class="text-right"> الكاتب/ة : {{Writer}}</p>
+            <p class="text-right"> حصل في : {{date}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+      {% endif %}  
+    {% endfor %}
+  {%endif%}
+{%endfor%}
+{%for num_post in range(2,num_events_10,1): %}
+      {%for year_event,num in list_year|zip(range(0,num_year_events,1)): %}
+      {% if (num_post - 1) * 10 <= num < num_post * 10 : %}
+          {% for year,date,heading,text,Link,Writer,link_nam in data_events['year']|zip(data_events['date'],data_events['heading'],data_events['text'],data_events['Link'],data_events['Writer'],links_nam): %}
+            {% if year == year_event : %}
+          <div class="modal fade " id="id-{{link_nam}}" tabindex="-1" aria-labelledby="id-{{link_nam}}-Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content text-dark">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="id-{{link_nam}}-Label">{{heading}}</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>{{text}}</p>  
+                  <a class="nav-link text-left" href="{{Link}}" target="_blank">_إقرأ المقال</a>
+                </div>
+                <div class="modal-footer" style=" justify-content: space-between;">
+                  <p class="text-right"> الكاتب/ة : {{Writer}}</p>
+                  <p class="text-right"> حصل في : {{date}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+            {% endif %}  
+          {% endfor %}
+        {%endif%}
+      {%endfor%}
+{%endfor%}
+</section>
+<div class="d-none">
+  <iframe src="{{ url_for('static', filename='audios/snaod.mp3') }}" allow="autoplay" id="audio"></iframe>
+  <audio id="player" autoplay controls><source src="{{ url_for('static', filename='audios/snaod.mp3') }}" type="audio/mp3"></audio>
+</div>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+{% endblock %}

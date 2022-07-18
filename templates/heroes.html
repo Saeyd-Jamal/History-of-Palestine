@@ -1,0 +1,65 @@
+{% extends 'basic.html' %}
+{% block body %}
+<section class="text-dark text-center py-3 " id="info">
+  <h1 class="">أبطال خلدهم <span class="red">التاريخ</span></h1>
+  <p>نتحدث عن ابطال فلسطين الذين قدمو لدولتنا الكثير من التضحيات</p>
+</section>
+<div style="height: 60px;" class="bg-dark d-flex align-items-center justify-content-around">
+  <div class="text-light d-inline">
+    الأبطال
+  </div>
+  <form class="float-end" method="POST" action="heroes_search">
+    <input type="search" value="" name="search" placeholder="إبحث عن بطل">
+  </form>
+</div>
+{% if search  %}
+<section class="card py-5">
+  <div class="row text-center px-5">
+      <div class="py-5 col-sm-12 col-md-6 col-lg-3">
+        <div class="card bg-dark card-border" style="width: 10rem;">
+          <img src="{{ url_for('static', filename='img_heroes/'+img_name_sh+'') }}" class="card-img-top text-center  border" alt="...">
+          <div class="card-body">
+              <a href="{{link_sh}}" target="_blank" style="text-decoration: none;">
+                <h4 class="card-text white">{{name_sh}}</h4>
+              </a>
+              <p class="card-text white">{{work_sh}}</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+{% else %}
+<section class="card py-5">
+  {% for num_con_hero  in range(1,num_con_heroes+1,1) : %}
+    <div class="container" id='con-{{num_con_hero}}'>
+      {% for num_row_hero in range(1,num_row_heroes+1,1): %}
+      {% if (num_con_hero - 1) * 2  <= num_row_hero < (num_con_hero) * 2 %}
+        <div class="row text-center px-5" id='row-{{num_row_hero}}'>
+          {% for name,work,link,img_name,num in data_heroes['name']|zip(data_heroes['work'],data_heroes['link'],data_heroes['img_name'],range(0,num_heroes,1)): %}
+          {% if (num_row_hero - 1) * 4  <= num < (num_row_hero) * 4 %}
+          <div class="py-5 col-sm-12 col-md-6 col-lg-3">
+            <div class="card bg-dark card-border" style="width: 10rem;">
+              <img src="static/img_heroes/{{img_name}}" class="card-img-top text-center border" alt="...">
+              <div class="card-body">
+                <a href="{{link}}" target="_blank" style="text-decoration: none;">
+                  <h4 class="card-text white">{{name}}</h4>
+                </a>
+                <p class="card-text white">{{work}}</p>
+              </div>
+            </div>
+          </div>
+          {%endif%}
+          {% endfor%}
+        </div>
+      {%endif%}
+      {% endfor%}
+    </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+<div class="d-none">
+  <iframe src="{{ url_for('static', filename='audios/mahmoud-darwish.m4a') }}" allow="autoplay" id="audio"></iframe>
+  <audio id="player" autoplay controls><source src="{{ url_for('static', filename='audios/mahmoud-darwish.m4a') }}" type="audio/m4a"></audio>
+</div>
+{% endblock %}
